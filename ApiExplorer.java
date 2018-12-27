@@ -21,7 +21,7 @@ import net.sf.json.JSONArray;;
 @Controller
 public class ApiExplorer{
 	
-	private static String ServiceKey ="JxtMZygjNXGZXV0NjqtD1Lpx56R%2F39ryIh2Akp998cATtP8coB6FDp0%2BtaAKKslq2EL1CWjWIDSJJZ4ZkRKbjw%3D%3D";
+	private static String ServiceKey ="keyValue";
 	
 	@Autowired
 	private StockSvc svc;
