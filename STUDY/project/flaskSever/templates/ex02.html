@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+     <h2>회원목록</h2>
+    <hr>
+
+    <table border="1" width="80%">
+        <tr>
+            <td>이름</td>
+            <td>나이</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{i.name}}</td>
+            <td>{{i.age}}</td>
+            <td>
+                <form action="update.do">
+                    <input type="hidden" name="_id" value="{{i._id}}">
+                    <input type="submit" value="수정">
+                </form>
+            </td>
+            <td>
+                <form action="delete.do">
+                    <input type="hidden" name="_id" value="{{i._id}}">
+                    <input type="submit" value="삭제">
+                </form>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+    <hr><br><hr>
+    <h2>회원등록</h2>
+    <hr>
+    <form method="post" action="list.do">
+        이름 :<input type="text" name="name"><br>
+        나이 :<input type="text" name="age"><br>
+        <input type="submit" value="등록">
+        <input type="reset" value="취소">
+    </form>
+</body>
+</html>

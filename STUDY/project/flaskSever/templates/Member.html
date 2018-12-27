@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=UTF-8>
+<meta name="viewport" 
+		content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript">
+	alert("환영합니다");
+</script>
+</head>
+<body>
+	
+	<div data-role="page" id="login">
+		<div data-role="header" data-add-back-btn="true">
+			<h3>로그인</h3>
+			<a  href="http://localhost:8089/pro/start.jsp" data-role="button">메뉴</a>
+		</div>
+		<div data-role="content">
+		<form action="/" data-ajax="false">
+			<input type="text" name="id" id="id">
+			<input type="password" name="pwd" id="pwd">
+			<input type="submit" value="로그인">
+		</form>
+		</div>
+		<div data-role="footer" data-position="fixed">
+		</div>
+	</div>
+	
+	<div data-role="page" id="member">
+		<div data-role="header" data-add-back-btn="true">
+			<h3>회원</h3>
+			<a  href="http://localhost:8089/pro/start.jsp" data-role="button">메뉴</a>
+		</div>
+		<div data-role="content">
+			<ul id="list" data-role="listview" id="rank">
+				<li>{{data.id}}</li>
+				<li>{{data.pwd}}</li>
+				<li>{{data.name}}</li>
+				<li>{{data.age}}</li>
+				<li>{{data.tel}}</li>			
+			</ul>
+		</div>
+		<div data-role="footer" data-position="fixed">
+		</div>
+	</div>
+	
+</body>
+</html>
