@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  tiles-definitions PUBLIC
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>    
+    <definition name="main" template="/WEB-INF/view/main.jsp"/>
+    
+    <definition name="defaultmain" template="/WEB-INF/view/template/defaultMain.jsp"> 
+    	<put-attribute name="header" value="/WEB-INF/view/template/defaultHeader.jsp" /> 
+    	<put-attribute name="body" value="/WEB-INF/view/template/defaultBody.jsp" /> 
+    	<put-attribute name="footer" value="/WEB-INF/view/template/defaultFooter.jsp" />
+    </definition>
+    <definition name="template/*" extends="defaultmain">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+    <definition name="template/*/*" extends="defaultmain">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+    </definition>
+    
+    <definition name="detail" template="/WEB-INF/view/template/defaultMain.jsp"> 
+    	<put-attribute name="header" value="/WEB-INF/view/template/defaultHeader.jsp" /> 
+    	<put-attribute name="body" value="/WEB-INF/view/freeBoard/detail.jsp" /> 
+    	<put-attribute name="footer" value="/WEB-INF/view/template/defaultFooter.jsp" />
+    </definition>
+    <definition name="freeBoard/*" extends="detail">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+    <definition name="freeBoard/*/*/*" extends="detail">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+    </definition>
+
+	<definition name="insert" template="/WEB-INF/view/template/defaultMain.jsp"> 
+    	<put-attribute name="header" value="/WEB-INF/view/template/defaultHeader.jsp" /> 
+    	<put-attribute name="body" value="/WEB-INF/view/freeBoard/insertPro.jsp" /> 
+    	<put-attribute name="footer" value="/WEB-INF/view/template/defaultFooter.jsp" />
+    </definition>
+    <definition name="freeBoard/*" extends="insert">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+    <definition name="freeBoard/*/*/*" extends="insert">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+    </definition>
+</tiles-definitions>

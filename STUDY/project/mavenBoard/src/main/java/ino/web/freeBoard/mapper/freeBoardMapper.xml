@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ino.web.freeBoard.mapper.FreeBoardMapper">
+
+	<select id="selectList" resultType="dto" parameterType="dto">
+		SELECT
+				    rnum
+				    , num
+				    , name
+				    , title
+				    , content
+				    , regdate
+		FROM (
+					    SELECT
+					        ROW_NUMBER() OVER(ORDER BY num DESC) AS rnum
+					        , num
+					        , name
+					        , title
+					        , content
+					        , TO_CHAR(regdate, 'YYYY/MM/DD') AS regdate
+					    FROM freeboard
+					    <if test="keyword  != ''">
+					    	WHERE 
+					    	<if test="keyOption == 'title'">
+					    		title LIKE '%'||#{keyword}||'%'
+					    	</if>
+					    	<if test="keyOption == 'name'">
+					    		name LIKE '%'||#{keyword}||'%'
+					    	</if>
+					    	<if test="keyOption == 'num'">
+					    		num =#{keyWordInt}
+					    	</if>
+					    </if>
+		) WHERE rnum BETWEEN #{fowardpage} AND #{endpage}
+	</select>
+	
+	<select id="getCount" resultType="int" parameterType="dto">
+		SELECT  
+			COUNT(NUM) 
+		FROM FREEBOARD
+			<if test="keyword  !=''">
+		    	WHERE 
+		    	<if test="keyOption == 'title'">
+		    		title LIKE '%'||#{keyword}||'%'
+		    	</if>
+		    	<if test="keyOption == 'name'">
+		    		name LIKE '%'||#{keyword}||'%'
+		    	</if>
+		    	<if test="keyOption == 'num'">
+		    		num =#{keyWordInt}
+		    	</if>
+		    </if>
+	</select>
+	
+	<select id="getMaxCount" resultType="int">
+		SELECT  MAX(NUM) FROM FREEBOARD
+	</select>
+	
+	<select id="selectOne" resultType="dto" parameterType="int">
+		SELECT NUM ,NAME ,TITLE ,CONTENT ,TO_CHAR(REGDATE,'YYYY/MM/DD') AS REGDATE FROM FREEBOARD WHERE NUM=#{num}
+	</select>
+	
+	<insert id="insert" parameterType="dto">
+		INSERT INTO FREEBOARD(
+  			NUM,
+			NAME,
+  			TITLE,
+  			CONTENT,
+  			REGDATE
+		)VALUES(
+  			FREEBOARDNUM_SEQ.NEXTVAL
+			,#{name}
+			,#{title}
+			,#{content}
+			,SYSDATE
+		)
+	</insert>
+	
+	<update id="update" parameterType="dto">
+		UPDATE FREEBOARD SET TITLE=#{title} ,CONTENT= #{content} WHERE NUM=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM FREEBOARD  WHERE NUM=#{num}
+	</delete>
+	
+	<delete id="page" parameterType="int">
+		DELETE FROM FREEBOARD  WHERE NUM=#{num}
+	</delete>
+
+</mapper>
